@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All-in-One Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f0f0f0;
+      padding: 20px;
+    }
+    .tabs button {
+      padding: 10px 20px;
+      margin: 5px;
+      cursor: pointer;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    .tabs button.active {
+      background: #0056b3;
+    }
+    .calculator {
+      display: none;
+      margin-top: 20px;
+    }
+    .calculator input {
+      margin: 5px;
+      padding: 5px;
+    }
+    .calculator button {
+      margin: 5px;
+      padding: 5px 10px;
+    }
+    .calculator h3 {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>All-in-One Calculator</h1>
+
+  <div class="tabs">
+    <button onclick="showCalc('simple')" class="active">Simple</button>
+    <button onclick="showCalc('scientific')">Scientific</button>
+    <button onclick="showCalc('advanced')">Advanced</button>
+  </div>
+
+  <!-- Simple Calculator -->
+  <div class="calculator" id="simple" style="display:block;">
+    <h2>Simple Calculator</h2>
+    <input type="number" id="s1" placeholder="First Number">
+    <input type="number" id="s2" placeholder="Second Number"><br>
+    <button onclick="simpleCalc('+')">+</button>
+    <button onclick="simpleCalc('-')">-</button>
+    <button onclick="simpleCalc('*')">*</button>
+    <button onclick="simpleCalc('/')">/</button>
+    <h3 id="simpleResult"></h3>
+  </div>
+
+  <!-- Scientific Calculator -->
+  <div class="calculator" id="scientific">
+    <h2>Scientific Calculator</h2>
+    <input type="number" id="sci" placeholder="Enter Number"><br>
+    <button onclick="sciCalc('sin')">sin</button>
+    <button onclick="sciCalc('cos')">cos</button>
+    <button onclick="sciCalc('tan')">tan</button>
+    <button onclick="sciCalc('sqrt')">√</button>
+    <button onclick="sciCalc('log')">log</button>
+    <h3 id="sciResult"></h3>
+  </div>
+
+  <!-- Advanced Scientific Calculator -->
+  <div class="calculator" id="advanced">
+    <h2>Advanced Scientific Calculator</h2>
+    <input type="number" id="a1" placeholder="First Number">
+    <input type="number" id="a2" placeholder="Second Number (if needed)"><br>
+    <button onclick="advCalc('+')">+</button>
+    <button onclick="advCalc('-')">-</button>
+    <button onclick="advCalc('*')">*</button>
+    <button onclick="advCalc('/')">/</button><br>
+    <button onclick="advCalc('^')">Power (^)</button>
+    <button onclick="advSci('sin')">sin</button>
+    <button onclick="advSci('cos')">cos</button>
+    <button onclick="advSci('tan')">tan</button>
+    <button onclick="advSci('sqrt')">√</button>
+    <button onclick="advSci('log')">log</button>
+    <button onclick="advSci('exp')">e^x</button>
+    <h3 id="advResult"></h3>
+  </div>
+
+  <script>
+    // Tab switcher
+    function showCalc(type) {
+      document.querySelectorAll('.calculator').forEach(c => c.style.display = 'none');
+      document.getElementById(type).style.display = 'block';
+      document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    // Simple Calculator
+    function simpleCalc(op) {
+      const n1 = parseFloat(document.getElementById("s1").value);
+      const n2 = parseFloat(document.getElementById("s2").value);
+      let res;
+      switch (op) {
+        case '+': res = n1 + n2; break;
+        case '-': res = n1 - n2; break;
+        case '*': res = n1 * n2; break;
+        case '/': res = n2 !== 0 ? n1 / n2 : "Divide by 0 Error"; break;
+      }
+      document.getElementById("simpleResult").innerText = "Result: " + res;
+    }
+
+    // Scientific Calculator
+    function sciCalc(func) {
+      const n = parseFloat(document.getElementById("sci").value);
+      let res;
+      switch (func) {
+        case 'sin': res = Math.sin(n); break;
+        case 'cos': res = Math.cos(n); break;
+        case 'tan': res = Math.tan(n); break;
+        case 'sqrt': res = Math.sqrt(n); break;
+        case 'log': res = Math.log10(n); break;
+      }
+      document.getElementById("sciResult").innerText = "Result: " + res;
+    }
+
+    // Advanced Calculator
+    function advCalc(op) {
+      const n1 = parseFloat(document.getElementById("a1").value);
+      const n2 = parseFloat(document.getElementById("a2").value);
+      let res;
+      switch (op) {
+        case '+': res = n1 + n2; break;
+        case '-': res = n1 - n2; break;
+        case '*': res = n1 * n2; break;
+        case '/': res = n2 !== 0 ? n1 / n2 : "Divide by 0 Error"; break;
+        case '^': res = Math.pow(n1, n2); break;
+      }
+      document.getElementById("advResult").innerText = "Result: " + res;
+    }
+
+    function advSci(func) {
+      const n = parseFloat(document.getElementById("a1").value);
+      let res;
+      switch (func) {
+        case 'sin': res = Math.sin(n); break;
+        case 'cos': res = Math.cos(n); break;
+        case 'tan': res = Math.tan(n); break;
+        case 'sqrt': res = Math.sqrt(n); break;
+        case 'log': res = Math.log10(n); break;
+        case 'exp': res = Math.exp(n); break;
+      }
+      document.getElementById("advResult").innerText = "Result: " + res;
+    }
+  </script>
+</body>
+</html>
